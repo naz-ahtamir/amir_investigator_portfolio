@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Shield, ArrowUpRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -47,7 +47,7 @@ export function Navigation() {
     >
       <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo (Left) */}
           <a
             href="#"
             className="flex items-center gap-3 group"
@@ -63,7 +63,7 @@ export function Navigation() {
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links (Right) */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <a
@@ -78,17 +78,6 @@ export function Navigation() {
                 {item.label}
               </a>
             ))}
-          </div>
-
-          {/* Right Action */}
-          <div className="hidden md:flex items-center">
-            <button
-              onClick={() => scrollToSection('#contact')}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-black text-white text-xs font-bold tracking-wider hover:bg-neutral-800 transition-colors"
-            >
-              <span>HUBUNGI</span>
-              <ArrowUpRight size={14} />
-            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -124,14 +113,6 @@ export function Navigation() {
                     {item.label}
                   </a>
                 ))}
-                <div className="pt-2">
-                  <button
-                    onClick={() => scrollToSection('#contact')}
-                    className="w-full py-2.5 bg-black text-white text-xs font-bold tracking-wider"
-                  >
-                    HUBUNGI
-                  </button>
-                </div>
               </div>
             </motion.div>
           )}
