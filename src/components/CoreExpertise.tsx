@@ -3,140 +3,189 @@
 import { motion } from 'framer-motion';
 import {
   Search,
-  FileText,
-  AlertTriangle,
-  Users,
-  Eye,
-  ClipboardCheck,
+  ShieldCheck,
+  Users2,
+  CheckCircle2,
+  ClipboardList,
+  Compass,
 } from 'lucide-react';
 
 const expertiseAreas = [
   {
     icon: Search,
-    title: 'Workplace Accident Investigation',
+    title: 'Investigasi Insiden & Root Cause Analysis',
+    badge: 'Spesialisasi Utama',
     description:
-      'Systematic incident investigation that identifies causes and helps prevent recurrence.',
+      'Investigasi kecelakaan kerja dan insiden berpotensi tinggi secara independen, objektif, dan berbasis bukti nyata untuk memutus mata rantai kecelakaan berulang.',
     capabilities: [
-      'Incident Documentation',
-      'Evidence Collection',
-      'Incident Timeline Reconstruction',
-      'Hazard and Contributing Factor Analysis',
-      'Root Cause Analysis',
-      'Corrective and Preventive Action Recommendations',
-      'Investigation Reporting',
-      'Lessons Learned',
+      'Olah TKP & Pengamanan Bukti Forensik K3',
+      'Wawancara Saksi & Teknik Penggalian Informasi Fakta',
+      'Rekonstruksi Kronologis & Timeline Kejadian',
+      'Analisis Akar Masalah (5-Whys, Fishbone, Tripod Beta)',
+      'Perumusan Tindakan Korektif & Preventif (CAPA)',
+      'Penyusunan Laporan Investigasi Standar Kemnaker RI',
     ],
   },
   {
-    icon: Users,
-    title: 'K3 Training and Safety Education',
+    icon: ClipboardList,
+    title: 'Identifikasi Bahaya & Penilaian Risiko (HIRADC)',
+    badge: 'Mitigasi Proaktif',
     description:
-      'Practical safety training that builds workers knowledge and develops safety habits.',
+      'Penilaian risiko menyeluruh terhadap operasional lapangan, peralatan mekanis, dan lingkungan kerja guna mencegah timbulnya kerugian.',
     capabilities: [
-      'Safety Induction',
-      'Toolbox Talks',
-      'Workplace Hazard Awareness',
-      'Accident Prevention Training',
-      'Safe Work Procedures',
-      'Emergency Response Training',
-      'Training Material Development',
-      'Training Evaluation',
+      'Penyusunan Matriks HIRADC / IBPR Komprehensif',
+      'Job Safety Analysis (JSA) untuk Pekerjaan Kritis',
+      'Sistem Izin Kerja Khusus (Permit to Work - PTW)',
+      'Program Isolasi Energi Berbahaya (Lockout / Tagout - LOTO)',
+      'Audit Kepatuhan K3 (PP No. 50/2012 & ISO 45001:2018)',
+      'Inspeksi Keselamatan Tempat Kerja & Housekeeping 5R',
     ],
   },
   {
-    icon: ClipboardCheck,
-    title: 'Hazard Identification and Risk Assessment',
+    icon: Users2,
+    title: 'Pelatihan K3 & Edukasi Keselamatan Kerja',
+    badge: 'Pengembangan SDM',
     description:
-      'Proactive identification of workplace hazards and evaluation of associated risks.',
+      'Penyelenggaraan pelatihan praktis dan terstruktur untuk menanamkan budaya keselamatan kerja yang berkelanjutan di seluruh lini organisasi.',
     capabilities: [
-      'Hazard Identification',
-      'HIRADC',
-      'Job Safety Analysis',
-      'Risk Evaluation',
-      'Control Measures',
-      'Safety Inspection',
-      'Incident Prevention',
+      'Pelatihan Investigasi Insiden untuk Pengawas & P2K3',
+      'Simulasi Tanggap Darurat & Pemadaman Api (APAR)',
+      'Pelatihan Bekerja di Ketinggian & Ruang Terbatas',
+      'Safety Leadership & Briefing Toolbox Meeting (TBM)',
+      'Behavior-Based Safety (BBS) & Stop Work Authority',
+      'Pengembangan Modul & Standard Operating Procedures (SOP)',
     ],
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
+const investigationSteps = [
+  {
+    step: '01',
+    title: 'Tanggap Cepat & Olah TKP',
+    desc: 'Pengamanan lokasi kejadian, isolasi bahaya residual, evakuasi, dan dokumentasi bukti fisik secara seksama.',
   },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
+  {
+    step: '02',
+    title: 'Pengumpulan Data & Saksi',
+    desc: 'Dokumentasi fotografi forensik, data operasional alat, dan wawancara saksi terstruktur tanpa intimidasi.',
   },
-};
+  {
+    step: '03',
+    title: 'Analisis Akar Masalah (RCA)',
+    desc: 'Pemetaan hubungan antara tindakan tidak aman, kondisi sub-standar, dan kegagalan sistem barier proteksi.',
+  },
+  {
+    step: '04',
+    title: 'Perumusan Rekomendasi (CAPA)',
+    desc: 'Penyusunan tindakan korektif dan preventif yang realistis berbasis Hierarki Pengendalian Bahaya.',
+  },
+  {
+    step: '05',
+    title: 'Laporan & Lessons Learned',
+    desc: 'Penyusunan dokumen resmi investigasi dan diseminasi pembelajaran agar kejadian serupa tidak terulang.',
+  },
+];
 
 export function CoreExpertise() {
   return (
-    <section id="expertise" className="py-20">
+    <section id="expertise" className="py-20 bg-white border-b border-neutral-200 relative">
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Core Expertise</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Specialized capabilities in workplace safety, incident investigation, and
-            workforce training.
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-neutral-100 border border-neutral-300 text-neutral-800 text-xs font-mono uppercase tracking-widest mb-3">
+            <Compass className="w-3.5 h-3.5 text-amber-600" />
+            Bidang Kompetensi
+          </div>
+          <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-black uppercase">
+            Pilar Keahlian Utama
+          </h2>
+          <p className="text-neutral-600 text-sm mt-2">
+            Kombinasi ketajaman investigatif forensik, manajemen risiko terstruktur, serta
+            pendekatan praktis dalam edukasi keselamatan kerja.
           </p>
-          <div className="w-16 h-1 bg-[#F6AD60] mx-auto mt-4" />
-        </motion.div>
+          <div className="w-16 h-0.5 bg-black mx-auto mt-4" />
+        </div>
 
-        {/* Expertise Cards */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {expertiseAreas.map((expertise, index) => (
-            <motion.div
-              key={index}
-              className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"
-              variants={cardVariants}
-            >
-              <div className="w-14 h-14 bg-[#F6AD60]/10 rounded-xl flex items-center justify-center mb-6">
-                <expertise.icon size={28} className="text-[#F6AD60]" />
+        {/* 3 Core Expertise Cards - Sharp Minimal */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {expertiseAreas.map((area, idx) => {
+            const Icon = area.icon;
+            return (
+              <div
+                key={idx}
+                className="bg-white p-7 border border-neutral-200 hover:border-black transition-colors flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-black">
+                      <Icon size={20} />
+                    </div>
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 bg-neutral-100 text-neutral-800 border border-neutral-200 uppercase">
+                      {area.badge}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-black mb-2 leading-snug">
+                    {area.title}
+                  </h3>
+
+                  <p className="text-xs text-neutral-600 mb-6 leading-relaxed">
+                    {area.description}
+                  </p>
+
+                  <div className="pt-4 border-t border-neutral-200">
+                    <h4 className="text-[11px] font-mono font-bold text-neutral-900 uppercase tracking-wider mb-3">
+                      Lingkup Kemampuan:
+                    </h4>
+                    <ul className="space-y-2">
+                      {area.capabilities.map((cap, i) => (
+                        <li key={i} className="flex items-start gap-2 text-xs text-neutral-600">
+                          <span className="w-1.5 h-1.5 bg-amber-500 mt-1.5 flex-shrink-0" />
+                          <span>{cap}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
+            );
+          })}
+        </div>
 
-              <h3 className="text-xl font-bold mb-3">{expertise.title}</h3>
+        {/* 5-Stage Investigation Workflow - Sharp Minimal */}
+        <div className="bg-black text-white p-8 lg:p-10 border border-neutral-900">
+          <div className="max-w-2xl mb-8">
+            <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest">
+              Standard Methodology
+            </span>
+            <h3 className="text-xl sm:text-2xl font-black text-white uppercase mt-1">
+              5 Tahapan Metodologi Investigasi & Mitigasi
+            </h3>
+            <p className="text-xs text-neutral-400 mt-2">
+              Alur kerja teruji untuk memastikan setiap penyelidikan insiden berjalan secara
+              akuntabel, menyeluruh, dan menghasilkan tindakan pencegahan yang terukur.
+            </p>
+          </div>
 
-              <p className="text-gray-600 mb-6">{expertise.description}</p>
-
-              <ul className="space-y-2">
-                {expertise.capabilities.slice(0, 5).map((capability, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-500">
-                    <span className="mt-1.5 w-1.5 h-1.5 bg-[#F6AD60] rounded-full flex-shrink-0" />
-                    {capability}
-                  </li>
-                ))}
-                {expertise.capabilities.length > 5 && (
-                  <li className="text-sm text-gray-400">
-                    + {expertise.capabilities.length - 5} more capabilities
-                  </li>
-                )}
-              </ul>
-            </motion.div>
-          ))}
-        </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {investigationSteps.map((step, idx) => (
+              <div
+                key={idx}
+                className="p-4 bg-neutral-900 border border-neutral-800 hover:border-neutral-600 transition-colors"
+              >
+                <div className="text-2xl font-black text-amber-500 mb-2 font-mono">
+                  {step.step}
+                </div>
+                <h4 className="text-xs font-bold text-white mb-2 uppercase leading-tight font-sans">
+                  {step.title}
+                </h4>
+                <p className="text-[11px] text-neutral-400 leading-relaxed font-sans">
+                  {step.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

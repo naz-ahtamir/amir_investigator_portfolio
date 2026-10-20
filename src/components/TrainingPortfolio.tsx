@@ -1,157 +1,205 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BookOpen, Shield, AlertOctagon, Users, FileCheck, Phone } from 'lucide-react';
+import {
+  ShieldCheck,
+  AlertTriangle,
+  Users2,
+  Clock,
+  CheckCircle2,
+  Flame,
+  FileCheck2,
+  Layers,
+  GraduationCap,
+} from 'lucide-react';
 
-const trainingTopics = [
+const trainingPrograms = [
   {
-    icon: Shield,
-    title: 'Workplace Safety Fundamentals',
-    description: 'Core principles of occupational safety and health.',
-    objectives: 'Understand hazard recognition, risk awareness, and safe work practices.',
+    icon: ShieldCheck,
+    title: 'Investigasi Kecelakaan Kerja & Root Cause Analysis (RCA)',
+    target: 'HSE Officer, P2K3, Manajer Lapangan & Supervisor',
+    duration: '2 - 3 Hari (Workshop & Olah TKP)',
+    description:
+      'Pelatihan metode penyelidikan insiden, pengamanan barang bukti fisik, teknik wawancara saksi objektif, serta perumusan CAPA SMART.',
+    modules: [
+      'Protokol tanggap darurat dan olah TKP',
+      'Metode analisis 5-Whys, Fishbone Diagram, dan Tripod Beta',
+      'Teknik wawancara saksi tanpa intimidasi (Cognitive Interviewing)',
+      'Standar pelaporan resmi Kemnaker & notifikasi 1x24 jam',
+    ],
   },
   {
-    icon: AlertOctagon,
-    title: 'Hazard Identification and Risk Assessment',
-    description: 'Proactive identification and evaluation of workplace hazards.',
-    objectives: 'Conduct HIRADC, perform job safety analysis, and implement controls.',
+    icon: FileCheck2,
+    title: 'Penyusunan HIRADC / IBPR & Job Safety Analysis (JSA)',
+    target: 'Site Engineer, Safety Officer & Pengawas Lapangan',
+    duration: '2 Hari Terstruktur',
+    description:
+      'Membekali peserta kemampuan menyusun register risiko bahaya operasional secara kuantitatif dan kualitatif sesuai standar ISO 45001 dan SMK3.',
+    modules: [
+      'Karakterisasi bahaya fisik, kimia, biologi, ergonomi, dan psikososial',
+      'Penentuan tingkat keparahan (severity) dan peluang (likelihood)',
+      'Hierarki pengendalian risiko: Eliminasi hingga APD',
+      'Praktik pembuatan JSA spesifik untuk pekerjaan kritis',
+    ],
   },
   {
-    icon: FileCheck,
-    title: 'Accident Prevention',
-    description: 'Strategies to identify and eliminate potential incident causes.',
-    objectives: 'Apply preventive measures and develop safety-conscious work habits.',
+    icon: Flame,
+    title: 'Simulasi Tanggap Darurat & Penanggulangan Kebakaran (APAR)',
+    target: 'Regu Peran Kebakaran, Floor Warden, Seluruh Karyawan',
+    duration: '1 Hari (Teori & Drill Lapangan)',
+    description:
+      'Latihan interaktif pemadaman api awal dengan APAR, fire blanket, manajemen evakuasi darurat, dan koordinasi muster point.',
+    modules: [
+      'Teori segitiga api dan klasifikasi kelas kebakaran (A, B, C, D)',
+      'Praktik teknik PASS APAR Powder, CO2, dan foam',
+      'Drill evakuasi simulasi asap dan penanganan korban panik',
+      'Pemeriksaan rutin kelayakan APAR dan jaringan hidran',
+    ],
   },
   {
-    icon: BookOpen,
-    title: 'Safe Work Procedures',
-    description: 'Establishing and following safe operational methods.',
-    objectives: 'Develop, communicate, and enforce safe work procedures.',
+    icon: Layers,
+    title: 'Keselamatan Bekerja di Ketinggian & Ruang Terbatas',
+    target: 'Teknisi Maintenance, Rigger, Operator Konstruksi',
+    duration: '2 Hari (Sertifikasi Internal / Refreshment)',
+    description:
+      'Praktek kepatuhan regulasi bekerja pada elevasi tinggi dan ruang sempit berbahaya, dilengkapi inspeksi kelayakan APD khusus.',
+    modules: [
+      'Standar Permenaker No. 09/2016 tentang Bekerja di Ketinggian',
+      'Inspeksi Full Body Harness, shock absorber, dan anchor points',
+      'Prosedur izin kerja ruang terbatas (Confined Space Entry Permit)',
+      'Pengujian gas berbahaya atmosfer (O2, H2S, CO, LEL)',
+    ],
   },
   {
-    icon: Phone,
-    title: 'Emergency Response',
-    description: 'Preparing for and responding to workplace emergencies.',
-    objectives: 'Execute evacuation procedures, first response, and emergency reporting.',
+    icon: Users2,
+    title: 'Safety Leadership & Dynamic Toolbox Meeting (TBM)',
+    target: 'Mandor, Foreman, Site Supervisor & Kepala Regu',
+    duration: '1 Hari Workshop Interaktif',
+    description:
+      'Membangun keterampilan komunikasi pengawas lini depan dalam memimpin briefing keselamatan harian yang persuasif dan melibatkan pekerja.',
+    modules: [
+      'Teknik intervensi bahaya dengan Stop Work Authority (SWA)',
+      'Bedah bahaya harian (Daily Hazard Identification)',
+      'Behavior-Based Safety (BBS): Menghilangkan unsafe act',
+      'Memberikan umpan balik positif terhadap kepatuhan K3',
+    ],
   },
   {
-    icon: Users,
-    title: 'Safety Awareness and Reporting',
-    description: 'Building a culture of vigilance and proactive reporting.',
-    objectives: 'Recognize hazards, report incidents, and participate in safety programs.',
+    icon: AlertTriangle,
+    title: 'Isolasi Energi Berbahaya (Lockout / Tagout - LOTO)',
+    target: 'Teknisi Elektrikal, Mekanik & Operator Mesin',
+    duration: '1 Hari Workshop Praktik',
+    description:
+      'Pelatihan komprehensif 6 langkah isolasi sumber energi (listrik, hidrolik, pneumatik, termal) untuk mencegah pelepasan energi tidak terkendali.',
+    modules: [
+      'Identifikasi sumber energi primer dan sisa (residual energy)',
+      'Pemasangan padlock, hasp, dan safety tag terstandarisasi',
+      'Prosedur verifikasi zero energy state sebelum intervensi mesin',
+      'Manajemen LOTO untuk pekerjaan regu gabungan (group lockout)',
+    ],
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
+const deliveryMethods = [
+  {
+    title: 'Materi Berbasis Risiko Nyata',
+    desc: 'Kurikulum disesuaikan dengan proses kerja, alat, dan profil bahaya spesifik di tempat kerja.',
   },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
+  {
+    title: 'Simulasi & Praktik Lapangan',
+    desc: 'Menekankan drill langsung, evaluasi peralatan, dan skenario penanganan situasi darurat nyata.',
   },
-};
+  {
+    title: 'Evaluasi & Tolok Ukur Kompetensi',
+    desc: 'Dilengkapi pre-test, post-test, dan instrumen penilaian efektivitas pembelajaran andragogi.',
+  },
+];
 
 export function TrainingPortfolio() {
   return (
-    <section id="training" className="py-20 bg-gray-50">
+    <section id="training" className="py-20 bg-neutral-50/60 border-b border-neutral-200 relative">
       <div className="container mx-auto px-6">
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">K3 Training Portfolio</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Practical training programs focused on building workforce safety competency and awareness.
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-neutral-300 text-neutral-800 text-xs font-mono uppercase tracking-widest mb-3">
+            <GraduationCap className="w-3.5 h-3.5 text-amber-600" />
+            Portofolio Edukasi K3
+          </div>
+          <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-black uppercase">
+            Program Pelatihan Keselamatan Kerja
+          </h2>
+          <p className="text-neutral-600 text-sm mt-2">
+            Rangkaian kurikulum dan materi ajar praktis yang telah diselenggarakan
+            untuk berbagai lini pekerja dan pengawas industri.
           </p>
-          <div className="w-16 h-1 bg-[#F6AD60] mx-auto mt-4" />
-        </motion.div>
+          <div className="w-16 h-0.5 bg-black mx-auto mt-4" />
+        </div>
 
-        {/* Training Cards */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {trainingTopics.map((topic, index) => (
-            <motion.div
-              key={index}
-              className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"
-              variants={itemVariants}
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[#F6AD60]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <topic.icon size={24} className="text-[#F6AD60]" />
-                </div>
+        {/* 6 Training Modules Grid - Sharp Minimal */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {trainingPrograms.map((program, idx) => {
+            const Icon = program.icon;
+            return (
+              <div
+                key={idx}
+                className="bg-white p-6 border border-neutral-200 hover:border-black transition-colors flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-9 h-9 bg-neutral-100 flex items-center justify-center text-black">
+                      <Icon size={18} />
+                    </div>
+                    <span className="flex items-center gap-1 text-[11px] font-mono text-neutral-600 bg-neutral-100 px-2 py-0.5 border border-neutral-200">
+                      <Clock size={11} className="text-amber-600" />
+                      {program.duration}
+                    </span>
+                  </div>
 
-                <div className="flex-1">
-                  <h3 className="font-bold mb-2">{topic.title}</h3>
-                  <p className="text-sm text-gray-600 mb-3">{topic.description}</p>
+                  <h3 className="text-base font-bold text-black mb-1.5 leading-snug">
+                    {program.title}
+                  </h3>
 
-                  <div className="pt-3 border-t border-gray-100">
-                    <p className="text-xs text-gray-500">
-                      <span className="font-medium text-gray-700">Learning Objectives:</span>{' '}
-                      {topic.objectives}
-                    </p>
+                  <div className="mb-3 text-[11px] font-mono text-neutral-700 bg-neutral-50 border border-neutral-200 px-2 py-1 inline-block">
+                    Target: {program.target}
+                  </div>
+
+                  <p className="text-xs text-neutral-600 mb-4 leading-relaxed">
+                    {program.description}
+                  </p>
+
+                  <div className="pt-3 border-t border-neutral-100">
+                    <h4 className="text-[10px] font-mono font-bold text-neutral-800 uppercase tracking-widest mb-2">
+                      Silabus Utama:
+                    </h4>
+                    <ul className="space-y-1.5">
+                      {program.modules.map((mod, i) => (
+                        <li key={i} className="flex items-start gap-2 text-xs text-neutral-600">
+                          <span className="w-1.5 h-1.5 bg-black mt-1.5 flex-shrink-0" />
+                          <span>{mod}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            );
+          })}
+        </div>
 
-        {/* Training Materials Placeholder */}
-        <motion.div
-          className="mt-16 max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-sm border border-gray-100">
-            <div className="text-center mb-8">
-              <h3 className="text-xl font-bold mb-2">Training Materials</h3>
-              <p className="text-gray-600">
-                Presentation decks, training photographs, and certificates can be showcased here.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              {/* Placeholder thumbnails */}
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center"
-                >
-                  <div className="text-center text-gray-400">
-                    <BookOpen size={32} className="mx-auto mb-2" />
-                    <p className="text-xs">Training Material {i}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-center text-sm text-gray-500 mt-6">
-              Add actual training photos, presentation previews, and certificates to{' '}
-              <code className="text-xs bg-gray-100 px-2 py-1 rounded">/public/training/</code>
-            </p>
+        {/* Training Methodology Summary - Sharp Minimal */}
+        <div className="bg-white p-6 md:p-8 border border-neutral-200">
+          <h3 className="text-xs font-mono font-bold text-neutral-900 uppercase tracking-widest mb-4 pb-2 border-b border-neutral-100">
+            Karakteristik Metodologi Pengajaran
+          </h3>
+          <div className="grid sm:grid-cols-3 gap-4">
+            {deliveryMethods.map((m, i) => (
+              <div key={i} className="p-3 bg-neutral-50 border border-neutral-200">
+                <h4 className="text-xs font-bold text-black mb-1 font-sans">{m.title}</h4>
+                <p className="text-xs text-neutral-600 leading-normal">{m.desc}</p>
+              </div>
+            ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

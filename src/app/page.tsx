@@ -1,20 +1,22 @@
 import { Navigation } from '@/components/Navigation';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
-import { CoreExpertise } from '@/components/CoreExpertise';
-import { TrainingPortfolio } from '@/components/TrainingPortfolio';
+// import { CoreExpertise } from '@/components/CoreExpertise';
+import { ProfessionalGallery } from '@/components/ProfessionalGallery';
+// import { TrainingPortfolio } from '@/components/TrainingPortfolio';
 import { Experience } from '@/components/Experience';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white">
       <Navigation />
       <Hero />
       <About />
-      <CoreExpertise />
-      <TrainingPortfolio />
+      {/* <CoreExpertise /> */}
+      <ProfessionalGallery />
+      {/* <TrainingPortfolio /> */}
       <Experience />
       <Contact />
       <Footer />

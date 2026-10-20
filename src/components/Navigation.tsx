@@ -2,15 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Shield, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '#about', label: 'About' },
-  { href: '#expertise', label: 'Expertise' },
-  { href: '#training', label: 'Training' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#about', label: 'TENTANG' },
+  { href: '#gallery', label: 'GALERI' },
+  { href: '#experience', label: 'PENGALAMAN' },
+  { href: '#contact', label: 'KONTAK' },
 ];
 
 export function Navigation() {
@@ -19,7 +18,7 @@ export function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -37,28 +36,34 @@ export function Navigation() {
   return (
     <motion.header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-200 border-b',
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-sm border-neutral-200 py-3 shadow-none'
+          : 'bg-white border-neutral-100 py-4'
       )}
-      initial={{ y: -100 }}
+      initial={{ y: -60 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
     >
-      <nav className="container mx-auto px-6 py-4">
+      <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a
             href="#"
-            className="text-xl font-bold tracking-tight"
+            className="flex items-center gap-3 group"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-          >
-            AMIRUDDIN<span className="text-[#F6AD60]">. D</span>
+          >            
+            <div>
+              <span className="text-base font-extrabold tracking-tight text-black">
+                》AMIRUDDIN <span className="text-amber-600">D.</span>
+              </span>              
+            </div>
           </a>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <a
@@ -68,33 +73,44 @@ export function Navigation() {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="text-sm font-medium text-gray-700 hover:text-[#F6AD60] transition-colors duration-200"
+                className="text-xs font-bold tracking-widest text-neutral-700 hover:text-black transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black hover:after:w-full after:transition-all"
               >
                 {item.label}
               </a>
             ))}
           </div>
 
+          {/* Right Action */}
+          <div className="hidden md:flex items-center">
+            <button
+              onClick={() => scrollToSection('#contact')}
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-black text-white text-xs font-bold tracking-wider hover:bg-neutral-800 transition-colors"
+            >
+              <span>HUBUNGI</span>
+              <ArrowUpRight size={14} />
+            </button>
+          </div>
+
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-gray-700"
+            className="md:hidden p-2 text-black border border-neutral-200"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label="Toggle navigation menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Drawer */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden"
+              className="md:hidden overflow-hidden border-t border-neutral-200 mt-3 pt-2 bg-white"
             >
-              <div className="pt-4 pb-2 space-y-2">
+              <div className="py-2 space-y-1">
                 {navItems.map((item) => (
                   <a
                     key={item.href}
@@ -103,11 +119,19 @@ export function Navigation() {
                       e.preventDefault();
                       scrollToSection(item.href);
                     }}
-                    className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-[#F6AD60] rounded-lg transition-colors duration-200"
+                    className="block px-3 py-2 text-xs font-bold tracking-widest text-neutral-800 hover:bg-neutral-100 transition-colors"
                   >
                     {item.label}
                   </a>
                 ))}
+                <div className="pt-2">
+                  <button
+                    onClick={() => scrollToSection('#contact')}
+                    className="w-full py-2.5 bg-black text-white text-xs font-bold tracking-wider"
+                  >
+                    HUBUNGI
+                  </button>
+                </div>
               </div>
             </motion.div>
           )}
